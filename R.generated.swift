@@ -207,13 +207,22 @@ struct _R: Rswift.Validatable {
     }
 
     #if os(iOS) || os(tvOS)
-    struct landing: Rswift.StoryboardResourceType, Rswift.Validatable {
+    struct landing: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = LandingController
+
       let bundle = R.hostingBundle
+      let landingController = StoryboardViewControllerResource<LandingController>(identifier: "LandingController")
       let name = "Landing"
 
+      func landingController(_: Void = ()) -> LandingController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: landingController)
+      }
+
       static func validate() throws {
+        if UIKit.UIImage(named: "ic-github", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-github' is used in storyboard 'Landing', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.landing().landingController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'landingController' could not be loaded from storyboard 'Landing' as 'LandingController'.") }
       }
 
       fileprivate init() {}
@@ -228,6 +237,7 @@ struct _R: Rswift.Validatable {
       let name = "LaunchScreen"
 
       static func validate() throws {
+        if UIKit.UIImage(named: "ic-github", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-github' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
@@ -238,14 +248,20 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = UIKit.UIViewController
+      typealias InitialController = UserListController
 
       let bundle = R.hostingBundle
       let name = "Main"
+      let userListController = StoryboardViewControllerResource<UserListController>(identifier: "UserListController")
+
+      func userListController(_: Void = ()) -> UserListController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: userListController)
+      }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.main().userListController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'userListController' could not be loaded from storyboard 'Main' as 'UserListController'.") }
       }
 
       fileprivate init() {}

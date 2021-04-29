@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E68DEDD3263AA99500BF4600 /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68DEDD2263AA99500BF4600 /* LandingController.swift */; };
+		E68DEDD6263AA9FE00BF4600 /* UserListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68DEDD5263AA9FE00BF4600 /* UserListController.swift */; };
+		E68DEDDA263AAA3600BF4600 /* UserListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68DEDD9263AAA3600BF4600 /* UserListCoordinator.swift */; };
 		E6AF066A263AA2960077C9B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AF0669263AA2960077C9B7 /* AppDelegate.swift */; };
 		E6AF0671263AA2960077C9B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6AF066F263AA2960077C9B7 /* Main.storyboard */; };
 		E6AF0673263AA2980077C9B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6AF0672263AA2980077C9B7 /* Assets.xcassets */; };
@@ -18,6 +21,9 @@
 
 /* Begin PBXFileReference section */
 		4DB4F2DCCE000217BD93713E /* Pods_GithubAccounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubAccounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E68DEDD2263AA99500BF4600 /* LandingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
+		E68DEDD5263AA9FE00BF4600 /* UserListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListController.swift; sourceTree = "<group>"; };
+		E68DEDD9263AAA3600BF4600 /* UserListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCoordinator.swift; sourceTree = "<group>"; };
 		E6AF0666263AA2960077C9B7 /* GithubAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6AF0669263AA2960077C9B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6AF0670263AA2960077C9B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,6 +102,8 @@
 		E6DCE278263AA54D008A1524 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E68DEDD2263AA99500BF4600 /* LandingController.swift */,
+				E68DEDD5263AA9FE00BF4600 /* UserListController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 		E6DCE27C263AA55D008A1524 /* coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				E68DEDD9263AAA3600BF4600 /* UserListCoordinator.swift */,
 			);
 			path = coordinators;
 			sourceTree = "<group>";
@@ -283,7 +292,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E68DEDD3263AA99500BF4600 /* LandingController.swift in Sources */,
 				E6AF066A263AA2960077C9B7 /* AppDelegate.swift in Sources */,
+				E68DEDDA263AAA3600BF4600 /* UserListCoordinator.swift in Sources */,
+				E68DEDD6263AA9FE00BF4600 /* UserListController.swift in Sources */,
 				E6DCE292263AA78E008A1524 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
