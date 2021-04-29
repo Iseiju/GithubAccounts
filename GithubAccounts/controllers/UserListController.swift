@@ -61,8 +61,13 @@ class UserListController: UIViewController {
       if isSuccess {
         self?.hideActivityIndicator()
       } else {
-        self?.showErrorMessage(title: "Something went wrong",
-                               message: errorOrNil?.localizedDescription ?? "")
+        if errorOrNil?.code == 403 {
+          self?.hideActivityIndicator()
+          self?.presentAlertController(message: errorOrNil?.localizedDescription ?? "")
+        } else {
+          self?.showErrorMessage(title: "Something went wrong",
+                                 message: errorOrNil?.localizedDescription ?? "")
+        }
       }
       
       self?.canLoadMore = canLoadMore
@@ -113,6 +118,11 @@ class UserListController: UIViewController {
     messageLabel.text = message
   }
   
+  private func presentAlertController(title: String = "Something went wrong", message: String) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    present(alertController, animated: true, completion: nil)
+  }
+  
   @IBAction func didTapTryAgain(_ sender: Any) {
     getUsers()
   }
@@ -133,9 +143,13 @@ extension UserListController: UITableViewDelegate {
     
     if indexPath.row == userCount - 1 && !isRequesting {
       isRequesting = true
-      viewModel?.getUsers(completion: { [weak self] _, canLoadMore, _ in
+      viewModel?.getUsers(completion: { [weak self] _, canLoadMore, errorOrNil in
         self?.isRequesting = false
         self?.canLoadMore = canLoadMore
+        
+        if errorOrNil?.code == 403 {
+          self?.presentAlertController(message: errorOrNil?.localizedDescription ?? "")
+        }
       })
     }
   }
