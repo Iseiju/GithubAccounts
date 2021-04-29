@@ -308,6 +308,7 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "accentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'accentColor' is used in storyboard 'Main', but couldn't be loaded.") }
         }
         if _R.storyboard.main().userListController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'userListController' could not be loaded from storyboard 'Main' as 'UserListController'.") }
       }

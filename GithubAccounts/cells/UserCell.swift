@@ -16,6 +16,12 @@ class UserCell: UITableViewCell {
   
   @IBOutlet weak var usernameLabel: UILabel!
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    avatarImageView.layer.cornerRadius = avatarImageView.bounds.size.height / 2
+  }
+  
   func set(_ cellViewModel: UserCellViewModel) {
     self.cellViewModel = cellViewModel
     

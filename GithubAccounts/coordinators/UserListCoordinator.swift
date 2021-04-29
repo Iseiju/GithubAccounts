@@ -19,6 +19,7 @@ class UserListCoordinator {
   
   func presentUserList() {
     guard let userListController = R.storyboard.main.userListController() else { return }
+    userListController.viewModel = UserListViewModel()
     
     let navController = UINavigationController(rootViewController: userListController)
     navController.navigationBar.prefersLargeTitles = true

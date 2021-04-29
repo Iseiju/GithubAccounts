@@ -14,8 +14,7 @@ class UserListViewModel {
   private let disposeBag = DisposeBag()
   
   private let userList = BehaviorRelay<[User]>(value: [])
-  
-  // MARK: - Main API request
+
   func getUsers(completion: @escaping (_ isSuccess: Bool, _ errorOrNil: Error?) -> Void) {
     let url = "https://api.github.com/users"
     
