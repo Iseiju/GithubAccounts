@@ -17,7 +17,7 @@ class UserListViewModel {
   func getUsers(completion: @escaping (_ isSuccess: Bool, _ errorOrNil: Error?) -> Void) {
     let url = "https://api.github.com/users"
     
-    APIClient.shared.getRequest(url: url, model: [User].self, completion: { response in
+    APIClient.shared.getRequest(url, model: [User].self, completion: { response in
       switch response.result {
       case .success(let users):
         self.userList.accept(users)

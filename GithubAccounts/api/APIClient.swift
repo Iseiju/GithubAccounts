@@ -12,7 +12,7 @@ class APIClient {
   
   static let shared: APIClient = { return APIClient() }()
   
-  func getRequest<T: Codable>(url: String,
+  func getRequest<T: Codable>(_ url: String,
                               model: T.Type,
                               completion: @escaping (_ response: DataResponse<T, AFError>) -> Void) {
     AF.request(url, method: .get).responseDecodable(of: model, completionHandler: completion)
