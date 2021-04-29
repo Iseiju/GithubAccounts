@@ -11,23 +11,48 @@ import RxSwift
 
 class UserListViewModel {
   
+  private var id = 0
+  
   private let disposeBag = DisposeBag()
   
   private let userList = BehaviorRelay<[User]>(value: [])
 
-  func getUsers(completion: @escaping (_ isSuccess: Bool, _ errorOrNil: Error?) -> Void) {
-    let url = "https://api.github.com/users"
+  func getUsers(completion: @escaping (_ isSuccess: Bool,
+                                       _ canLoadMore: Bool,
+                                       _ errorOrNil: Error?) -> Void) {
+    let url = "https://api.github.com/users?since=\(id)"
     
     APIClient.shared.getRequest(url, model: [User].self, completion: { response in
       switch response.result {
       case .success(let users):
-        self.userList.accept(users)
-        completion(true, nil)
+        if self.id == 0 {
+          self.userList.accept(users)
+        } else {
+          var userList = self.userList.value
+          userList.append(contentsOf: users)
+          
+          self.userList.accept(userList)
+        }
+        
+        print("USER ID: \(users.last?.id)")
+        self.id = users.last?.id ?? 0
+        
+        completion(true, true, nil)
         
       case .failure(let error as Error):
-        completion(false, error)
+        print(error.asAFError?.errorDescription)
+        print(error.asAFError?.localizedDescription)
+        completion(false, false, error)
       }
     })
+  }
+  
+  func userCount() -> Int {
+    return userList.value.count
+  }
+  
+  func resetId() {
+    id = 0
   }
   
   func cellViewModels() -> BehaviorRelay<[UserCellViewModel]> {

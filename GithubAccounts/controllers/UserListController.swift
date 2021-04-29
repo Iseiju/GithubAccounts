@@ -12,6 +12,9 @@ import UIKit
 class UserListController: UIViewController {
   
   var viewModel: UserListViewModel?
+  
+  private var canLoadMore = false
+  private var isRequesting = false
 
   private let disposeBag = DisposeBag()
   
@@ -54,21 +57,26 @@ class UserListController: UIViewController {
   private func getUsers() {
     showActivityIndicator()
     
-    viewModel?.getUsers(completion: { [weak self] isSuccess, errorOrNil in
+    viewModel?.getUsers(completion: { [weak self] isSuccess, canLoadMore, errorOrNil in
       if isSuccess {
         self?.hideActivityIndicator()
       } else {
         self?.showErrorMessage(title: "Something went wrong",
                                message: errorOrNil?.localizedDescription ?? "")
       }
+      
+      self?.canLoadMore = canLoadMore
     })
   }
   
   @objc private func refreshList() {
+    viewModel?.resetId()
+    
     refreshControl.beginRefreshing()
     
-    viewModel?.getUsers(completion: { [weak self] _, _ in
+    viewModel?.getUsers(completion: { [weak self] _, canLoadMore, _ in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        self?.canLoadMore = canLoadMore
         self?.refreshControl.endRefreshing()
       }
     })
@@ -114,5 +122,21 @@ extension UserListController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
+  }
+  
+  func tableView(_ tableView: UITableView,
+                 willDisplay cell: UITableViewCell,
+                 forRowAt indexPath: IndexPath) {
+    guard canLoadMore else { return }
+        
+    guard let userCount = viewModel?.userCount() else { return }
+    
+    if indexPath.row == userCount - 1 && !isRequesting {
+      isRequesting = true
+      viewModel?.getUsers(completion: { [weak self] _, canLoadMore, _ in
+        self?.isRequesting = false
+        self?.canLoadMore = canLoadMore
+      })
+    }
   }
 }
