@@ -123,10 +123,12 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 1 colors.
+  /// This `R.color` struct is generated, and contains static references to 2 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+    /// Color `activityIndicatorColor`.
+    static let activityIndicatorColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "activityIndicatorColor")
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
@@ -137,11 +139,28 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "activityIndicatorColor", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func activityIndicatorColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.activityIndicatorColor, compatibleWith: traitCollection)
+    }
+    #endif
+
     #if os(watchOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func accentColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.accentColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "activityIndicatorColor", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func activityIndicatorColor(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.activityIndicatorColor.name)
     }
     #endif
 
@@ -269,6 +288,7 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if UIKit.UIImage(named: "ic-github", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-github' is used in storyboard 'Landing', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "activityIndicatorColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'activityIndicatorColor' is used in storyboard 'Landing', but couldn't be loaded.") }
         }
         if _R.storyboard.landing().landingController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'landingController' could not be loaded from storyboard 'Landing' as 'LandingController'.") }
       }
@@ -309,6 +329,7 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "accentColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'accentColor' is used in storyboard 'Main', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "activityIndicatorColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'activityIndicatorColor' is used in storyboard 'Main', but couldn't be loaded.") }
         }
         if _R.storyboard.main().userListController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'userListController' could not be loaded from storyboard 'Main' as 'UserListController'.") }
       }

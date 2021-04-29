@@ -18,7 +18,7 @@ class UserListController: UIViewController {
   private lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-//    refreshControl.tintColor = R.color.accentColor()
+    refreshControl.tintColor = R.color.activityIndicatorColor()
     return refreshControl
   }()
   

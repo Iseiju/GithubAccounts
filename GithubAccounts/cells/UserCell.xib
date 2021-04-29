@@ -24,16 +24,18 @@
                                 <rect key="frame" x="12" y="12" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Z2K-N5-obx" secondAttribute="height" id="ECw-6S-hcj"/>
-                                    <constraint firstAttribute="height" constant="80" id="gvQ-vD-BPP"/>
+                                    <constraint firstAttribute="height" constant="80" id="gvQ-vD-BPP">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKI-Zx-T3I">
-                                <rect key="frame" x="104" y="42" width="321" height="20"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <rect key="frame" x="112" y="39.5" width="305" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -41,8 +43,8 @@
                         <constraints>
                             <constraint firstItem="mKI-Zx-T3I" firstAttribute="centerY" secondItem="A4v-1h-LZY" secondAttribute="centerY" id="2TA-bh-Sxb"/>
                             <constraint firstItem="Z2K-N5-obx" firstAttribute="leading" secondItem="A4v-1h-LZY" secondAttribute="leading" constant="12" id="8fq-f5-xqL"/>
-                            <constraint firstItem="mKI-Zx-T3I" firstAttribute="leading" secondItem="Z2K-N5-obx" secondAttribute="trailing" constant="12" id="G5N-q7-xaV"/>
-                            <constraint firstAttribute="trailing" secondItem="mKI-Zx-T3I" secondAttribute="trailing" constant="12" id="Ld3-rT-ire"/>
+                            <constraint firstItem="mKI-Zx-T3I" firstAttribute="leading" secondItem="Z2K-N5-obx" secondAttribute="trailing" constant="20" id="G5N-q7-xaV"/>
+                            <constraint firstAttribute="trailing" secondItem="mKI-Zx-T3I" secondAttribute="trailing" constant="20" id="Ld3-rT-ire"/>
                             <constraint firstItem="Z2K-N5-obx" firstAttribute="top" secondItem="A4v-1h-LZY" secondAttribute="top" constant="12" id="Pls-sh-URV"/>
                             <constraint firstAttribute="bottom" secondItem="Z2K-N5-obx" secondAttribute="bottom" constant="12" id="fVU-pu-B4M"/>
                         </constraints>
