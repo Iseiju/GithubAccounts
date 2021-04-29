@@ -8,4 +8,5 @@ target 'GithubAccounts' do
   # Pods for GithubAccounts
   pod 'Alamofire', '~> 5.4.1'
   pod 'Kingfisher', '~> 6.0.1'
+  pod 'R.swift', '~> 5.3.1'
 end
