@@ -11,6 +11,8 @@ import RxSwift
 
 class UserListViewModel {
   
+  private let disposeBag = DisposeBag()
+  
   private let userList = BehaviorRelay<[User]>(value: [])
   
   // MARK: - Main API request
@@ -27,5 +29,17 @@ class UserListViewModel {
         completion(false, error)
       }
     })
+  }
+  
+  func cellViewModels() -> BehaviorRelay<[UserCellViewModel]> {
+    let cellViewModels = BehaviorRelay<[UserCellViewModel]>(value: [])
+    
+    userList.subscribe(onNext: { user in
+      cellViewModels.accept(user.map { user in
+        return UserCellViewModel(user)
+      })
+    }).disposed(by: disposeBag)
+    
+    return cellViewModels
   }
 }
