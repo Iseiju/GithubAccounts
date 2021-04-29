@@ -172,6 +172,34 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  struct nib {
+    /// Nib `UserCell`.
+    static let userCell = _R.nib._UserCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "UserCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.userCell) instead")
+    static func userCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.userCell)
+    }
+    #endif
+
+    static func userCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UserCell? {
+      return R.nib.userCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UserCell
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  struct reuseIdentifier {
+    /// Reuse identifier `UserCell`.
+    static let userCell: Rswift.ReuseIdentifier<UserCell> = Rswift.ReuseIdentifier(identifier: "UserCell")
+
+    fileprivate init() {}
+  }
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       try _R.validate()
@@ -191,6 +219,26 @@ struct _R: Rswift.Validatable {
     try storyboard.validate()
     #endif
   }
+
+  #if os(iOS) || os(tvOS)
+  struct nib {
+    struct _UserCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = UserCell
+
+      let bundle = R.hostingBundle
+      let identifier = "UserCell"
+      let name = "UserCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UserCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UserCell
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+  #endif
 
   #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {

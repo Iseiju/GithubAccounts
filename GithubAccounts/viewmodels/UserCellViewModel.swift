@@ -9,7 +9,7 @@ import Foundation
 
 class UserCellViewModel {
   
-  var name: String { return user?.username ?? "" }
+  var username: String { return "@\(user?.username ?? "")" }
   
   var avatarUrl: URL? { return URL(string: user?.avatarUrl ?? "") }
   
